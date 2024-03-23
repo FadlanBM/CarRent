@@ -4,7 +4,7 @@
               <div class="col-12">
                   <div class="card">
                       <div class="card-header">
-                          <a href="<?= base_url('/users/create') ?>" class="btn btn-primary btn-sm"><i
+                          <a href="<?= base_url('admin/users/create') ?>" class="btn btn-primary btn-sm"><i
                                   class="fa fa-plus"></i> Tambah Users</a>
                       </div>
                       <!-- /.card-header -->
@@ -45,7 +45,7 @@
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                     axios.delete(`<?= base_url('users/delete/' . $item->user_id) ?>`)
+                     axios.post(`<?= base_url('admin/users/destroy/' . $item->user_id) ?>`)
                          .then((response) => {
                         Swal.fire(
                             'Success!',
@@ -97,7 +97,8 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form action="<?= base_url('users/update/' . $item->user_id) ?>" id="formData" method="post">
+                      <form action="<?= base_url('admin/users/update/' . $item->user_id) ?>" id="formData" method="post">
+					      <input type="hidden" name="_method" value="PUT">
                           <div class="card-body">
                               <div class="form-group">
                                   <label for="name">Name</label>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Users extends CI_Controller
+class UsersController extends CI_Controller
 {
     public function __construct()
     {
@@ -47,33 +47,40 @@ class Users extends CI_Controller
             ];
             $this->users_model->insert('users', $data);
             $this->session->set_flashdata('success', 'Tambah data user successfully!');
-            redirect('users');
+            redirect('admin/users');
         }
     }
 
     public function update($user_id)
     {
-        $this->_rules_update();
-        if ($this->form_validation->run() == false) {
-			$this->index();
-        } else {
-			 $data = [
-				'user_id'=>$user_id,
-                'name' => $this->input->post('name'),
-                'username' => $this->input->post('username'),         
-                'level' => $this->input->post('level'),
-            ];
+        $method = $this->input->post('_method');
+        if ($method === 'PUT') {
+            $this->_rules_update();
+            if ($this->form_validation->run() == false) {
+                $this->index();
+            } else {
+                $data = [
+                    'user_id' => $user_id,
+                    'name' => $this->input->post('name'),
+                    'username' => $this->input->post('username'),
+                    'level' => $this->input->post('level'),
+                ];
 
-			$this->users_model->update('users', $data);            
-            redirect('users');
-        }
+                $this->users_model->update('users', $data);
+				$this->session->set_flashdata('success', 'Update data user successfully!');
+                redirect('admin/users');
+            }
+        }else{
+			redirect('admin/users');
+		}
     }
 
-	public function delete($user_id){
+    public function destroy($user_id)
+    {
         $this->users_model->destroy('users', $user_id);
         $this->session->set_flashdata('success', 'Form Delete successfully!');
-        redirect('users');
-	}
+        redirect('admin/users');
+    }
 
     public function _rules()
     {
@@ -95,14 +102,14 @@ class Users extends CI_Controller
         ]);
     }
 
-	public function _rules_update()
+    public function _rules_update()
     {
         $this->form_validation->set_rules('name', 'Name', 'required', [
             'required' => '%s Name harus diisi !!',
         ]);
         $this->form_validation->set_rules('username', 'Username', 'required', [
             'required' => '%s Username harus diisi !!',
-        ]);    
+        ]);
         $this->form_validation->set_rules('level', 'Level', 'required', [
             'required' => '%s Role harus diisi !!',
         ]);
