@@ -55,6 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['login']['GET'] = 'LoginController/index';
+$route['login']['post'] = 'LoginController/login';
+$route['register']['GET'] = 'RegisterController/index';
 
 $route['admin/dashboad']['GET'] = 'DashboardController/index';
 
