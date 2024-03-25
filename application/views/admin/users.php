@@ -31,9 +31,9 @@
                                       <td>
                                           <button data-toggle="modal" data-target="#edt_users<?= $item->user_id ?>"
                                               class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>
-                                              Update</button>                                       
-                                        <a x-data="{ tooltip: 'Delete' }" href="#" class="btn btn-danger btn-sm"
-                                            x-on:click.prevent="
+                                              Update</button>
+                                          <a x-data="{ tooltip: 'Delete' }" href="#" class="btn btn-danger btn-sm"
+                                              x-on:click.prevent="
             Swal.fire({
                 title: 'Apakah Anda yakin?',
                 text: 'Tindakan ini tidak dapat dikembalikan!',
@@ -66,7 +66,8 @@
                     });
                 }
             });
-        "><i class="fa fa-trash"></i>
+        "><i
+                                                  class="fa fa-trash"></i>
                                               Hapus</a>
                                       </td>
                                   </tr>
@@ -97,8 +98,9 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form action="<?= base_url('admin/users/update/' . $item->user_id) ?>" id="formData" method="post">
-					      <input type="hidden" name="_method" value="PUT">
+                      <form action="<?= base_url('admin/users/update/' . $item->user_id) ?>" id="formData"
+                          method="post">
+                          <input type="hidden" name="_method" value="PUT">
                           <div class="card-body">
                               <div class="form-group">
                                   <label for="name">Name</label>
@@ -114,20 +116,20 @@
                               <div class="form-group">
                                   <label for="username">Username</label>
                                   <input type="text" class="form-control" id="username" name="username"
-                                     placeholder="Masukan username user" value="<?= $item->username?>">
+                                      placeholder="Masukan username user" value="<?= $item->username ?>">
                                   <?= form_error(
                                       'username',
                                       '<div class="alert alert_error"> <button aria-hidden="true" data-dismiss="alert" class="close"
                          type="button">&times;</button> <strong>',
                                       '</strong> </div>',
                                   ) ?>
-                              </div>                    
+                              </div>
                               <!-- select -->
                               <div class="form-group">
                                   <label for="level">Select</label>
                                   <select class="form-control" name="level" id="role">
-                                      <option value="0" <?php echo ($item->level == '0') ? 'selected' : ''; ?>>Petugas</option>
-                                      <option value="1" <?php echo ($item->level == '1') ? 'selected' : ''; ?>>Admin</option>
+                                      <option value="0" <?php echo $item->level == '0' ? 'selected' : ''; ?>>Petugas</option>
+                                      <option value="1" <?php echo $item->level == '1' ? 'selected' : ''; ?>>Admin</option>
                                   </select>
                                   <?= form_error(
                                       'role',
@@ -138,7 +140,42 @@
                               </div>
                           </div>
                           <div class="modal-footer">
-                              <button type="button" id="resetButton" class="btn btn-danger"><i class="fa-solid fa-arrow-rotate-right"></i> Reset Password</button>
+                              <a id="resetButton" class="btn btn-danger text-white" x-data="{ tooltip: 'Reset' }"
+                                  x-on:click.prevent="
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Tindakan ini tidak dapat dikembalikan!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Reset Password!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                     axios.post(`<?= base_url('admin/users/resetPass/' . $item->user_id) ?>`)
+                         .then((response) => {
+                        Swal.fire(
+                            'Success!',
+                            'Delete data successfully.',
+                            'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                    })
+                    .catch((error) => {
+                        Swal.fire(
+                            'Fail!',
+                            'An error occurred while deleting account.',
+                            'error'
+                        );
+                    });
+                }
+            });
+        "><i
+                                      class="fa-solid fa-arrow-rotate-right"></i> Reset Password</a>
                               <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>
                                   Submit</button>
                               <button type="reset" class="btn btn-secondary" data-dismiss="modal">Back</button>

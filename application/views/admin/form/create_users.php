@@ -85,7 +85,7 @@
                      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Submit</button>
                      <button type="reset" id="resetButton" class="btn btn-warning"><i
                              class="fa-solid fa-arrow-rotate-right"></i> Reset</button>
-                     <a href="<?= base_url('users') ?>" class="btn btn-danger">Back</a>
+                     <a href="<?= base_url('admin/users') ?>" class="btn btn-danger">Back</a>
                  </div>
              </form>
          </div>

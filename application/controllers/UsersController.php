@@ -11,6 +11,7 @@ class UsersController extends CI_Controller
 
     public function index()
     {
+        $this->middleware->restrict();
         $data['title'] = 'Managemen Users';
         $data['breadcrumb'] = ['Managemen Users'];
         $data['users'] = $this->users_model->index('users')->result();
@@ -67,12 +68,12 @@ class UsersController extends CI_Controller
                 ];
 
                 $this->users_model->update('users', $data);
-				$this->session->set_flashdata('success', 'Update data user successfully!');
+                $this->session->set_flashdata('success', 'Update data user successfully!');
                 redirect('admin/users');
             }
-        }else{
-			redirect('admin/users');
-		}
+        } else {
+            redirect('admin/users');
+        }
     }
 
     public function destroy($user_id)
@@ -114,6 +115,15 @@ class UsersController extends CI_Controller
             'required' => '%s Role harus diisi !!',
         ]);
     }
-}
 
+    public function resetPass($user_id)
+    {
+        $data = [
+			'user_id' => $user_id,
+            'password' => password_hash('12345678', PASSWORD_DEFAULT),
+        ];
+        $this->users_model->update('users', $data);
+        $this->session->set_flashdata('success', 'Update data user successfully!');
+    }
+}
 ?>

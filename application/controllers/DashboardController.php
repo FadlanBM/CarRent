@@ -2,16 +2,15 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class DashboardController extends CI_Controller
-{
+{     
     public function __construct()
     {
-        parent::__construct();
-        $this->load->library('AuthMiddleware');
+        parent::__construct();		
     }
 
     public function index()
-    {
-        $this->AuthMiddleware->restrict();
+    {		
+		$this->middleware->restrict();
         $data['title'] = 'Dashboard';
         $data['breadcrumb'] = ['Dashboard'];
         $this->load->view('template/header', $data);

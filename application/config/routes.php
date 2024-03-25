@@ -56,12 +56,19 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['login']['GET'] = 'LoginController/index';
 $route['login']['post'] = 'LoginController/login';
-$route['register']['GET'] = 'RegisterController/index';
 
-$route['admin/dashboad']['GET'] = 'DashboardController/index';
+$route['admin/dashboard']['GET'] = 'DashboardController/index';
 
 $route['admin/users']['GET'] = 'UsersController/index';
 $route['admin/users/create']['GET'] = 'UsersController/create';
 $route['admin/users/store']['POST'] = 'UsersController/store';
 $route['admin/users/update/(:any)']['POST'] = 'UsersController/update/$1';
+$route['admin/users/resetPass/(:any)']['POST'] = 'UsersController/resetPass/$1';
 $route['admin/users/destroy/(:any)']['POST'] = 'UsersController/destroy/$1';
+
+$route['admin/mobil']['GET'] = 'MobileController/index';
+$route['admin/mobil/create']['GET'] = 'MobileController/create';
+
+$route['admin/carsead']['GET'] = 'CarSeadController/index';
+
+$route['logout']['POST'] = 'LogoutController/logout';

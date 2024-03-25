@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AuthMiddleware {
+class middleware {
     
     protected $CI;
 
@@ -12,6 +12,11 @@ class AuthMiddleware {
     public function restrict() {
         if (!$this->CI->session->userdata('logged_in')) {
             redirect('login'); 
+        }
+    }
+    public function restrictstatus() {
+        if ($this->CI->session->userdata('logged_in')) {
+            redirect('admin/dashboard');
         }
     }
 }
