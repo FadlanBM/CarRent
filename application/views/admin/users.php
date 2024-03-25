@@ -104,7 +104,7 @@
                           <div class="card-body">
                               <div class="form-group">
                                   <label for="name">Name</label>
-                                  <input type="text" class="form-control" id="name" name="name"
+                                  <input type="text" class="form-control" id="name" name="name" required
                                       placeholder="Masukan nama user" value="<?= $item->name ?>">
                                   <?= form_error(
                                       'name',
@@ -115,7 +115,7 @@
                               </div>
                               <div class="form-group">
                                   <label for="username">Username</label>
-                                  <input type="text" class="form-control" id="username" name="username"
+                                  <input type="text" class="form-control" id="username" name="username" required
                                       placeholder="Masukan username user" value="<?= $item->username ?>">
                                   <?= form_error(
                                       'username',

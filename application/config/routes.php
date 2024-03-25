@@ -68,7 +68,13 @@ $route['admin/users/destroy/(:any)']['POST'] = 'UsersController/destroy/$1';
 
 $route['admin/mobil']['GET'] = 'MobileController/index';
 $route['admin/mobil/create']['GET'] = 'MobileController/create';
+$route['admin/mobil/store']['POST'] = 'MobileController/store';
+
 
 $route['admin/carsead']['GET'] = 'CarSeadController/index';
+$route['admin/carsead/store']['POST'] = 'CarSeadController/store';
+$route['admin/carsead/update/(:any)']['POST'] = 'CarSeadController/update/$1';
+$route['admin/carsead/destroy/(:any)']['POST'] = 'CarSeadController/destroy/$1';
+
 
 $route['logout']['POST'] = 'LogoutController/logout';

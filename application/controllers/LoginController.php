@@ -27,7 +27,7 @@ class LoginController extends CI_Controller
         if (!empty($username) && !empty($password)) {
             $data = [
                 'username' => $username,
-                'password' => $password, // Sudah di-hash saat registrasi
+                'password' => $password, 
             ];
             $res = $this->auth_model->login($data);
             if ($res !== false) {
